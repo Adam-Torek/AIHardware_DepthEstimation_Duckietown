@@ -11,3 +11,8 @@ html/*
 # Ignore Model folder
 models/*
 *.pth
+
+# Ignore the datasets folder since it only contains 
+# images and annotations that we don't need or want to
+# have attached to Git
+DepthAnything_Evaluation/datasets
