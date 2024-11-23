@@ -5,6 +5,8 @@ import torch
 import os
 import csv
 import json
+import numpy as np
+from torchvision import transforms
 
 """Tensorflow-based data loader for the NYU2 depth image dataset. This utility
 class lets us load both our test and training datasets using two or three lines
@@ -12,11 +14,17 @@ of code in two or three lines. This class includes image augmentation functional
 that will randomly flip and crop images and will always resize the image if a different
 size is provided. """
 class NYUV2DataSet(torch.utils.data.Dataset): 
-    def __init__(self, dataset_path, csv_name):
+    def __init__(self, dataset_path, csv_name, image_size = (518, 518)):
         # initialize the data loader parameters 
         self.dataset_path = dataset_path
         self.input_images = []
         self.depth_images = []
+        self.image_size = image_size
+
+        self.converter = transforms.Compose([
+                    transforms.PILToTensor(),
+                    transforms.Resize(self.image_size, antialias=True)
+            ])
 
         # Open the CSV file that contains the paths to the input and 
         # depth estimation images 
@@ -42,14 +50,18 @@ class NYUV2DataSet(torch.utils.data.Dataset):
         image =  Image.open(self.input_images[idx])
         # Load in the grayscale depth image from its file path using openCV
         depth_image = Image.open(self.depth_images[idx])
-        
-        return image, depth_image
+
+        pytorch_image = self.converter(image)
+        pytorch_depth_image = self.converter(depth_image).float()
+
+        return pytorch_image, pytorch_depth_image
 
 
 class DA2KDataSet(torch.utils.data.Dataset):
 
     def __init__(self, dataset_path):
         self.dataset_path = dataset_path
+
         with open(os.path.join(dataset_path, "annotations.json"),"r") as annotations_file:
             image_annotations = json.load(annotations_file)
             self.image_paths = list(image_annotations.keys())
