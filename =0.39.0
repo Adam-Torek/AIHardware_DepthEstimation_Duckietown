@@ -3,17 +3,9 @@ Requirement already satisfied: torch in /home/adam-torek/miniconda3/envs/duckieb
 Requirement already satisfied: numpy in /home/adam-torek/miniconda3/envs/duckiebot/lib/python3.11/site-packages (from bitsandbytes) (1.26.4)
 Requirement already satisfied: filelock in /home/adam-torek/.local/lib/python3.11/site-packages (from torch->bitsandbytes) (3.16.1)
 Requirement already satisfied: typing-extensions>=4.8.0 in /home/adam-torek/.local/lib/python3.11/site-packages (from torch->bitsandbytes) (4.12.2)
-Collecting sympy==1.13.1 (from torch->bitsandbytes)
-  Using cached sympy-1.13.1-py3-none-any.whl.metadata (12 kB)
+Requirement already satisfied: sympy==1.13.1 in /home/adam-torek/miniconda3/envs/duckiebot/lib/python3.11/site-packages (from torch->bitsandbytes) (1.13.1)
 Requirement already satisfied: networkx in /home/adam-torek/miniconda3/envs/duckiebot/lib/python3.11/site-packages (from torch->bitsandbytes) (3.2.1)
 Requirement already satisfied: jinja2 in /home/adam-torek/miniconda3/envs/duckiebot/lib/python3.11/site-packages (from torch->bitsandbytes) (3.1.4)
 Requirement already satisfied: fsspec in /home/adam-torek/miniconda3/envs/duckiebot/lib/python3.11/site-packages (from torch->bitsandbytes) (2024.3.1)
 Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/adam-torek/miniconda3/envs/duckiebot/lib/python3.11/site-packages (from sympy==1.13.1->torch->bitsandbytes) (1.3.0)
 Requirement already satisfied: MarkupSafe>=2.0 in /home/adam-torek/miniconda3/envs/duckiebot/lib/python3.11/site-packages (from jinja2->torch->bitsandbytes) (2.1.3)
-Using cached sympy-1.13.1-py3-none-any.whl (6.2 MB)
-Installing collected packages: sympy
-  Attempting uninstall: sympy
-    Found existing installation: sympy 1.13.2
-    Uninstalling sympy-1.13.2:
-      Successfully uninstalled sympy-1.13.2
-Successfully installed sympy-1.13.1

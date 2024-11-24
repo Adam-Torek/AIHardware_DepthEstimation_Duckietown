@@ -27,8 +27,18 @@ def eval_depth(pred, target):
             'rmse': rmse.item(), 'rmse_log': rmse_log.item(), 'log10':log10.item(), 'silog':silog.item()}
 
 
-def eval_accuracy(pred, points, closer_point):
-    pred_point_1 = pred[points[0]]
-    pred_point_2 = pred[points[1]]
-    
-    pass
+def eval_accuracy(predicted_depth, input_points, closer_point):
+    input_point_1, input_point_2 = input_points
+    depth_point1 = predicted_depth[input_point_1[1],input_point_1[0]].item()
+    depth_point2 = predicted_depth[input_point_2[1], input_point_2[0]].item()
+
+    predicted_closer_point = 0
+    if depth_point1 > depth_point2:
+        predicted_closer_point = 0
+    elif depth_point2 > depth_point1:
+        predicted_closer_point = 1
+    else:
+        predicted_closer_point = 2
+
+    return predicted_closer_point == closer_point
+

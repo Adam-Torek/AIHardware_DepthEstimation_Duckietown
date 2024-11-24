@@ -1,0 +1,20 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Current File with Arguments",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "DepthAnything_Evaluation/evaluation_runner.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--nyu2_data_dir","DepthAnything_Evaluation/datasets/NYUV2",
+                "--da2k_data_dir","DepthAnything_Evaluation/datasets/DA-2K",
+                "--output_dir","DepthAnything_Evaluation/results"
+            ]
+        }
+    ]
+}
