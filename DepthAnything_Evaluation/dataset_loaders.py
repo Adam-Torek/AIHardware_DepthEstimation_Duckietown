@@ -58,32 +58,59 @@ class NYUV2DataSet(torch.utils.data.Dataset):
 
 
 class DA2KDataSet(torch.utils.data.Dataset):
-
+    """Pytorch-based Data Loader for the DA-2K dataset 
+    benchmark released by Yang et. al. This dataset contains
+    2K real and generated images with a closer point and further
+    point that are both annotated by humans. The closer and further
+    away points are in challenging locations of the image that 
+    require any model tested on said benchmark to precisely
+    estimate the given depth of an image. They are also in varied
+    locations covering many different scenes to test a depth 
+    estimation model's ability to correctly determine depth in
+    fine detail across a variety of situations, locations, and
+    environments. The DA-2K images are made to be challenging 
+    but represent realistic scenarios in which a depth estimation
+    model may be used."""
     def __init__(self, dataset_path):
+        """Initialize the dataset from the given path. Loads the images and
+        point labels into memory. The images come by themselves from subfolders
+        and the annotations come from a JSON file provided with the dataset."""
         self.dataset_path = dataset_path
 
+        # Open the annotations JSON file and load its information into memory
         with open(os.path.join(dataset_path, "annotations.json"),"r") as annotations_file:
             image_annotations = json.load(annotations_file)
+            # Get all of the image paths in the DA2K dataset
             self.image_paths = list(image_annotations.keys())
+
+            # Set up class variables
             self.image_points = []
             self.closer_points = []
             self.images = []
+            # Load in each image and labeled points into memory
             for i, image in enumerate(image_annotations.values()):
                 image = image[0]
+                # Load the locations of the two labelled points in
                 self.image_points.append((image["point1"], image["point2"]))
+                # Find which point is closer and label it
                 if image["closer_point"] == "point1":
                     self.closer_points.append(0)
                 elif image["closer_point"] == "point2":
                     self.closer_points.append(1)
+                # Open the image as a PIL image file and load it into memory
                 image_data = Image.open(os.path.join(self.dataset_path, self.image_paths[i]))
                 self.images.append(image_data)
+        # Set the length of the entire dataset
         self.len = len(self.image_paths)
-        pass
+        
 
     def __len__(self):
+        """Return the size of the DA-2K dataset (around 2K images)"""
         return self.len
 
     def __getitem__(self, idx):
+        """Get the image, the location of the two annotated points, 
+        and which point is the closer point at the specified index."""
         image_data = {}
         image_data["image"] = self.images[idx]
         image_data["points"] = self.image_points[idx]
