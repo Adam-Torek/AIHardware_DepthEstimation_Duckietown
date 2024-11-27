@@ -134,4 +134,4 @@ TODO: Put your results analysis and tables here
 
 - HuggingFace (Model Repository): [Link](https://huggingface.co/)
 
-- Half Quadratic Quantization (HQQ): [Link](https://mobiusml.github.io/hqq_blog/)
+- Half Quadratic Quantization (HQQ) Implementation: [Link](https://mobiusml.github.io/hqq_blog/)
