@@ -7,7 +7,7 @@ import time
 import numpy as np
 
 from dpt import DepthAnythingV2
-s
+
 from duckietown.dtros import DTROS, NodeType
 from sensor_msgs.msg import CompressedImage
 

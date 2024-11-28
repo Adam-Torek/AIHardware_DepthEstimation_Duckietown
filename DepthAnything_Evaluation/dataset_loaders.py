@@ -51,7 +51,7 @@ class NYUV2DataSet(torch.utils.data.Dataset):
         # Load in the grayscale depth image from its file path using openCV
         depth_image = Image.open(self.depth_images[idx])
 
-        pytorch_image = self.converter(image)
+        pytorch_image = self.converter(image).float()
         pytorch_depth_image = self.converter(depth_image).float()
 
         return pytorch_image, pytorch_depth_image
