@@ -126,12 +126,12 @@ TODO: Put your results analysis and tables here
 
 ## Citations
 
-- Depth Anything V2 Paper: [Link](https://arxiv.org/abs/2406.09414) 
+- Badri, H., & Shaji, A. (2023). Half-Quadratic Quantization. Github.io. https://mobiusml.github.io/hqq_blog/
 
-- Duckietown Robot Platform: [Link](https://duckietown.com/)
+- Paull, L., Tani, J., Ahn, H., Alonso-Mora, J., Carlone, L., Cap, M., Chen, Y. F., Choi, C., Dusek, J., Fang, Y., Hoehener, D., Liu, S.-Y., Novitzky, M., Okuyama, I. F., Pazis, J., Rosman, G., Varricchio, V., Wang, H.-C., Yershov, D., & Zhao, H. (2017, May 1). Duckietown: An open, inexpensive and flexible platform for autonomy education and research. IEEE Xplore; IEEE. https://doi.org/10.1109/ICRA.2017.7989179
 
-- NYUV2 Depth Dataset: [Link](https://cs.nyu.edu/~fergus/datasets/nyu_depth_v2.html)
+- Silberman, N., Kholi, P., Hoiem, D., & Fergus, R. (2012). NYU Depth V2 «Nathan Silberman. Cs.nyu.edu; NYU. https://cs.nyu.edu/~fergus/datasets/nyu_depth_v2.html
 
-- HuggingFace (Model Repository): [Link](https://huggingface.co/)
+- Wolf, T., Debut, L., Sanh, V., Chaumond, J., Delangue, C., Moi, A., Cistac, P., Rault, T., Louf, R., Funtowicz, M., & Brew, J. (2020). HuggingFace’s Transformers: State-of-the-art Natural Language Processing. ArXiv:1910.03771 [Cs]. https://arxiv.org/abs/1910.03771
 
-- Half Quadratic Quantization (HQQ) Implementation: [Link](https://mobiusml.github.io/hqq_blog/)
+- Yang, L., Kang, B., Huang, Z., Zhao, Z., Xu, X., Feng, J., & Zhao, H. (2024). Depth Anything V2. ArXiv.org. https://arxiv.org/abs/2406.09414
