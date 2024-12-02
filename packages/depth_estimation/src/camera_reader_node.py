@@ -39,7 +39,7 @@ class CameraReaderNode(DTROS):
         self.device = 'cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu'
 
         # Set the size of the depth estimation model
-        self.encoder_type = 'vitb'
+        self.encoder_type = 'vits'
 
         # Set parameters for each of the depth estimation model sizes
         self.model_configs = {
@@ -51,7 +51,7 @@ class CameraReaderNode(DTROS):
 
         # Load the depth estimation model into memory and its weights
         self.dpt2 = DepthAnythingV2(**self.model_configs[self.encoder_type])
-        self.dpt2.load_state_dict(torch.load(f"models/depth_anything_v2_{self.encoder_type}.pth", map_location="cpu"))
+        self.dpt2.load_state_dict(torch.load(f"models/depth_anything_v2_{self.encoder_type}.pth"))
 
         # Move the model into the specific device's memory and evaluate it 
         self.dpt2 = self.dpt2.to(self.device).eval()
@@ -61,7 +61,6 @@ class CameraReaderNode(DTROS):
 
 
     def callback(self, msg):
-        time.sleep(0.01)
         # convert JPEG bytes to CV image
         image = self._bridge.compressed_imgmsg_to_cv2(msg)
 
