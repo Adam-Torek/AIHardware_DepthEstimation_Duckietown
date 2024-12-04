@@ -124,6 +124,47 @@ from the Depth-Anything-V2 base model on the other.
 
 TODO: Put your results analysis and tables here
 
+### Quantization Results
+
+![Quantization Results For Depth-Anything-V2 Models](images/QuantizationResultTables.PNG)
+
+Overall, the half quadratic quantization (HQQ) method we used performed very well. The tables for all sizes of 
+Depth-Anything-V2 show no decrease in accuracy, delta, and abs-rel metrics on
+ the 8-bit, 4-bit, 2-bit, and 1-bit quantization sizes we tested. In fact, some quantization
+ settings performed better than their unquantized version. In particular, the abs-rel score of 
+ Depth-Anything-V2 increased on the NYUV2 Depth Anything dataset increased as quantization
+ size decreased. There were also some decreases in model performance depending on quantization as well.
+ For example, the accuracy of Depth-Anything-V2 small on the DA-2K dataset decreased from 49.8% unquantized to
+  47.1% on HQQ's 2 bit quantization setting. However, this performance decrease is not
+  reflected for the base or large model sizes. Overall, HQQ quantization is good at preserving
+  model performance. We think that HQQ preserves model performance because it accounts for outliers
+  and important weights in the weight distribution of the model being quantized through its 
+  half-quadratic optimization method. 
+
+  ![Inference Speed and Model Size Results for Depth-Anything-V2 Small](images/InferenceSpeed_Small.PNG)
+
+![Inference Speed and Model Size Results for Depth-Anything-V2 Base](images/InferenceSpeed_Base.PNG)
+
+
+![Inference Speed and Model Size Results for Depth-Anything-V2 Large](images/InferenceSpeed_Large.PNG)
+
+  HQQ's biggest impact during our evaluation was on the average inference time for model sizes.
+  The graphs above clearly show a linear increase in average inference time on both the NYUV2 Depth
+  and DA-2K datasets as the quantization size decreases for all Depth-Anything-V2 sizes. We believe
+  this result is likely due to This shows
+  that lower HQQ quantization sizes will hurt real-time performance on depth estimation models 
+  like Depth-Anything-V2. We believe that this is due to weight dequantization and re-quantization
+  that occurs during inference. The tighter the quantization bound is, the more processing power
+  needs to be spend de-compressing and re-compressing model weights, and thus overall inference time
+  increases. 
+
+HQQ quantization also decreased the memory size of all Depth-Anything-V2 models, but 
+there is no linear decrease in model size as quantization decreases. Instead, 8-bit
+quantization seems to have the biggest decrease in model size relative to the unquantized
+version, with 1-bit quantization following closely behind for the biggest model size decrease. Interestingly, 2-bit and especially 4-bit quantization had the smallest decreases on model sizes of all quantization settings. We expected that model size in memory would
+decrease linearly as the quantization size decreased, but that did not happen. We do not have a good explanation for why this is the case. Our best guess is that is has something to do with the hardware and firmware of the NVIDIA RTX 3090 GPU we evaluated on. There was likely some 
+optimization in the hardware and firmware of the 3090 that made 8-bit quantization more efficient than other forms of quantization.
+
 ## Citations
 
 - Badri, H., & Shaji, A. (2023). Half-Quadratic Quantization. Github.io. https://mobiusml.github.io/hqq_blog/
